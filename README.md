@@ -1,5 +1,5 @@
 ## InstancedSkinning Example
 
-Use DrawMeshInstanced and Textued2DArray
+Use DrawMeshInstanced and Texture2DArray
 
 Batch count increase from Character Kind 
