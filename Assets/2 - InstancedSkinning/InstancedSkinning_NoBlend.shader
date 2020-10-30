@@ -1,4 +1,8 @@
-﻿Shader "Custom/InstancedSkinning_NoBlend" {
+﻿// Upgrade NOTE: upgraded instancing buffer '_BoneMatrixs' to new syntax.
+// Upgrade NOTE: upgraded instancing buffer '_BonePositions' to new syntax.
+// Upgrade NOTE: upgraded instancing buffer '_FragmentBuffer' to new syntax.
+
+Shader "Custom/InstancedSkinning_NoBlend" {
 	Properties {
 		_MainTexArray ("Albedo (RGB)", 2DArray) = "white" {}
 	}
@@ -35,31 +39,37 @@
 
 			#define UNITY_MAX_INSTANCE_COUNT 100
 
-			UNITY_INSTANCING_CBUFFER_START(_BonePositions)
-				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition0);
-				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition1);
-				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition2);
-				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition3);
-				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition4);
-				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition5);
-			UNITY_INSTANCING_CBUFFER_END
+			UNITY_INSTANCING_BUFFER_START(_BonePositions)
+				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition0)
+#define _BonePosition0_arr _BonePositions
+				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition1)
+#define _BonePosition1_arr _BonePositions
+				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition2)
+#define _BonePosition2_arr _BonePositions
+				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition3)
+#define _BonePosition3_arr _BonePositions
+				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition4)
+#define _BonePosition4_arr _BonePositions
+				UNITY_DEFINE_INSTANCED_PROP(float4, _BonePosition5)
+#define _BonePosition5_arr _BonePositions
+			UNITY_INSTANCING_BUFFER_END(_BonePositions)
 			
 			float4 GetPosition(uint index)
 			{
 				switch(index)
 				{
 					case 0:
-						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition0);
+						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition0_arr, _BonePosition0);
 					case 1:
-						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition1);
+						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition1_arr, _BonePosition1);
 					case 2:
-						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition2);
+						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition2_arr, _BonePosition2);
 					case 3:
-						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition3);
+						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition3_arr, _BonePosition3);
 					case 4:
-						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition4);
+						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition4_arr, _BonePosition4);
 					case 5:
-						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition5);
+						return UNITY_ACCESS_INSTANCED_PROP(_BonePosition5_arr, _BonePosition5);
 				}
 
 				return float4(1, 1, 1, 1);
@@ -67,31 +77,37 @@
 			
 			#define UNITY_MAX_INSTANCE_COUNT 100
 
-			UNITY_INSTANCING_CBUFFER_START(_BoneMatrixs)
-				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix0);
-				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix1);
-				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix2);
-				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix3);
-				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix4);
-				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix5);
-			UNITY_INSTANCING_CBUFFER_END
+			UNITY_INSTANCING_BUFFER_START(_BoneMatrixs)
+				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix0)
+#define _BoneTransfromMatrix0_arr _BoneMatrixs
+				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix1)
+#define _BoneTransfromMatrix1_arr _BoneMatrixs
+				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix2)
+#define _BoneTransfromMatrix2_arr _BoneMatrixs
+				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix3)
+#define _BoneTransfromMatrix3_arr _BoneMatrixs
+				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix4)
+#define _BoneTransfromMatrix4_arr _BoneMatrixs
+				UNITY_DEFINE_INSTANCED_PROP(float4x4, _BoneTransfromMatrix5)
+#define _BoneTransfromMatrix5_arr _BoneMatrixs
+			UNITY_INSTANCING_BUFFER_END(_BoneMatrixs)
 
 			float4x4 GetMatrix(uint index)
 			{
 				switch(index)
 				{
 					case 0:
-						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix0);
+						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix0_arr, _BoneTransfromMatrix0);
 					case 1:
-						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix1);
+						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix1_arr, _BoneTransfromMatrix1);
 					case 2:
-						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix2);
+						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix2_arr, _BoneTransfromMatrix2);
 					case 3:
-						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix3);
+						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix3_arr, _BoneTransfromMatrix3);
 					case 4:
-						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix4);
+						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix4_arr, _BoneTransfromMatrix4);
 					case 5:
-						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix5);
+						return UNITY_ACCESS_INSTANCED_PROP(_BoneTransfromMatrix5_arr, _BoneTransfromMatrix5);
 				}
 
 				return UNITY_MATRIX_MVP;
@@ -119,10 +135,8 @@
 				
 				return o;
 			}
-
-			UNITY_INSTANCING_CBUFFER_START(_FragmentBuffer)
-				float _TextureIndex;
-			UNITY_INSTANCING_CBUFFER_END
+			
+			uniform float _TextureIndex;
 
 			UNITY_DECLARE_TEX2DARRAY(_MainTexArray);
 

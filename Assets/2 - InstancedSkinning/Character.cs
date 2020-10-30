@@ -27,7 +27,7 @@
             public Matrix4x4[] boneTransformMatrix;
             public Vector4[] bonePosition;
         }
-
+        
         public void BuildComponents()
         {
             if (isAnimated)
@@ -40,6 +40,8 @@
                 animator.runtimeAnimatorController = animatorController;
 
                 animator.SetFloat("Forward", UnityEngine.Random.Range(0f, 1f));
+                animator.SetFloat("Offset", UnityEngine.Random.Range(0.0f, 1.0f));
+                animator.SetFloat("Scale", UnityEngine.Random.Range(0.5f, 1.5f));
             }
         }
 

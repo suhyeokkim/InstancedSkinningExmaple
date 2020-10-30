@@ -183,17 +183,18 @@
 
             Texture2D texture = textures[textureIndex];
 
-            Rect rect = EditorGUILayout.BeginVertical();
+            Rect rect = new Rect();
+            rect.height = EditorGUIUtility.currentViewWidth / texture.width * texture.height / 2;
+            rect.width = EditorGUIUtility.currentViewWidth / 2;
 
-            rect.height = rect.width / texture.width * texture.height / 2;
-            rect.width = rect.width / 2;
+            EditorGUILayout.BeginVertical(GUILayout.Height(rect.height));
 
+            rect.position = EditorGUILayout.GetControlRect().position;
             rect.x += rect.width / 2;
 
             EditorGUI.DrawTextureTransparent(rect, texture);
 
             EditorGUILayout.EndVertical();
-            EditorGUILayout.Space();
         }
     }
 
